@@ -33,23 +33,53 @@
       theme: {
         extend: {
           colors: {
+            // Tesla Design System
+            bg: {
+              primary: '#0A0A0A',
+              secondary: '#121212',
+              card: '#1A1A1A',
+              input: '#1A1A1A'
+            },
+            text: {
+              primary: '#FFFFFF',
+              secondary: '#8A8A8A',
+              muted: '#5A5A5A'
+            },
+            accent: {
+              primary: '#3E68FF',
+              hover: '#5A80FF',
+              success: '#00D26A',
+              alert: '#FF3B30',
+              warning: '#FF9500'
+            },
+            border: {
+              DEFAULT: '#2A2A2A',
+              focus: '#3E68FF',
+              subtle: '#1F1F1F'
+            },
+            // Legacy aliases
             carb: {
-              navy: '#020617',
-              blue: '#0a192f',
-              accent: '#3b82f6',
-              green: '#00C853',
-              grey: '#1e293b'
+              navy: '#0A0A0A',
+              accent: '#3E68FF',
+              green: '#00D26A'
             }
+          },
+          borderRadius: {
+            sm: '4px',
+            md: '6px',
+            lg: '8px'
+          },
+          fontWeight: {
+            regular: '400',
+            medium: '500',
+            semibold: '600'
+          },
+          letterSpacing: {
+            tight: '-0.02em',
+            normal: '0'
           },
           animation: {
             'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-            'shimmer': 'shimmer 2s infinite',
-          },
-          keyframes: {
-            shimmer: {
-              '0%': { backgroundPosition: '-200% 0' },
-              '100%': { backgroundPosition: '200% 0' },
-            }
           }
         }
       }
@@ -57,61 +87,160 @@
   </script>
   
   <style>
+    /* Tesla Design System Variables */
     :root {
       --safe-top: env(safe-area-inset-top);
       --safe-bottom: env(safe-area-inset-bottom);
+
+      /* Backgrounds */
+      --bg-primary: #0A0A0A;
+      --bg-secondary: #121212;
+      --bg-card: #1A1A1A;
+      --bg-input: #1A1A1A;
+
+      /* Text */
+      --text-primary: #FFFFFF;
+      --text-secondary: #8A8A8A;
+      --text-muted: #5A5A5A;
+
+      /* Accent */
+      --accent-primary: #3E68FF;
+      --accent-hover: #5A80FF;
+      --accent-success: #00D26A;
+      --accent-alert: #FF3B30;
+      --accent-warning: #FF9500;
+
+      /* Borders */
+      --border-default: #2A2A2A;
+      --border-focus: #3E68FF;
+      --border-subtle: #1F1F1F;
+
+      /* Radius */
+      --radius-sm: 4px;
+      --radius-md: 6px;
+      --radius-lg: 8px;
     }
 
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background-color: #020617;
-      color: #ffffff;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
       -webkit-tap-highlight-color: transparent;
       margin: 0;
       overflow-x: hidden;
-      letter-spacing: -0.01em;
+      letter-spacing: -0.02em;
     }
 
     .pb-safe { padding-bottom: calc(1rem + var(--safe-bottom)); }
     .pt-safe { padding-top: calc(1rem + var(--safe-top)); }
-    
+
+    /* Tesla-style buttons */
+    .btn-primary {
+      background: var(--accent-primary);
+      color: var(--text-primary);
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 14px 24px;
+      font-weight: 600;
+      font-size: 15px;
+      letter-spacing: -0.02em;
+      transition: background 0.2s ease;
+      cursor: pointer;
+    }
+    .btn-primary:hover { background: var(--accent-hover); }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-primary);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-sm);
+      padding: 14px 24px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: border-color 0.2s ease;
+    }
+    .btn-secondary:hover { border-color: var(--text-secondary); }
+
+    .btn-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-card);
+      border: 1px solid var(--border-default);
+    }
+
+    /* Tesla-style cards */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-md);
+      padding: 24px;
+    }
+
+    /* Tesla-style inputs */
+    .input {
+      background: var(--bg-input);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      padding: 14px 16px;
+      font-size: 16px;
+      width: 100%;
+      transition: border-color 0.2s ease;
+    }
+    .input:focus {
+      border-color: var(--border-focus);
+      outline: none;
+    }
+    .input::placeholder { color: var(--text-muted); }
+
+    /* Nav bar */
+    .nav-bar {
+      background: var(--bg-primary);
+      border-top: 1px solid var(--border-subtle);
+      padding: 8px 0 20px 0;
+    }
+    .nav-item {
+      color: var(--text-secondary);
+      font-size: 10px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .nav-item.active { color: var(--text-primary); }
+    .nav-item.active::after {
+      content: '';
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: var(--text-primary);
+      margin: 4px auto 0;
+    }
+
+    /* Legacy glass effects (kept for compatibility) */
     .glass {
-      background: rgba(255, 255, 255, 0.03);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: var(--bg-card);
+      border: 1px solid var(--border-default);
     }
-
     .glass-dark {
-      background: rgba(0, 0, 0, 0.4);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
     }
 
-    .status-glow-green {
-      box-shadow: 0 0 20px rgba(0, 200, 83, 0.2);
-      border: 1px solid rgba(0, 200, 83, 0.4);
-    }
-
-    .status-glow-red {
-      box-shadow: 0 0 20px rgba(239, 68, 68, 0.2);
-      border: 1px solid rgba(239, 68, 68, 0.4);
-    }
+    /* Status indicators */
+    .status-success { border: 1px solid var(--accent-success); }
+    .status-alert { border: 1px solid var(--accent-alert); }
 
     ::-webkit-scrollbar { width: 4px; }
     ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
+    ::-webkit-scrollbar-thumb { background: var(--border-default); border-radius: 10px; }
 
-    ::selection { background: #3b82f6; color: white; }
+    ::selection { background: var(--accent-primary); color: white; }
 
-    .active-haptic:active { transform: scale(0.96); transition: transform 0.1s; }
-
-    .text-gradient {
-      background: linear-gradient(135deg, #ffffff 0%, #94a3b8 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+    .active-haptic:active { transform: scale(0.98); transition: transform 0.1s; }
   </style>
 <script type="importmap">
 {
