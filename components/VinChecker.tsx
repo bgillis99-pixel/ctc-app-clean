@@ -4,15 +4,40 @@ import { extractVinFromImage, findTestersNearby, validateVINCheckDigit } from '.
 import { decodeVinNHTSA, NHTSAVehicle } from '../services/nhtsa';
 import { trackEvent } from '../services/analytics';
 
-const APPLE_ICON = (
-  <svg className="w-5 h-5" viewBox="0 0 384 512" fill="currentColor">
-    <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z" />
+// Professional icons
+const ICON_CAMERA = (
+  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+    <circle cx="12" cy="13" r="4"/>
   </svg>
 );
 
-const ANDROID_ICON = (
-  <svg className="w-5 h-5" viewBox="0 0 576 512" fill="currentColor">
-    <path d="M420.55 301.93a24 24 0 1 1 24-24 24 24 0 0 1-24 24zm-265.1 0a24 24 0 1 1 24-24 24 24 0 0 1-24 24zm378.7-151.1l33.8-58.5a11 11 0 0 0-3.9-15.1 11.2 11.2 0 0 0-15.2 4L515 139.75c-50.7-42.3-116.3-65.6-187-65.6s-136.3 23.3-187 65.6l-33.8-58.5a11.2 11.2 0 0 0-15.2-4 11 11 0 0 0-3.9 15.1l33.8 58.5C51.5 197.6 0 285.5 0 384h576c0-98.5-51.5-186.4-121.85-233.17z" />
+const ICON_TRUCK = (
+  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <rect x="1" y="3" width="15" height="13" rx="2"/>
+    <path d="M16 8h4l3 3v5h-7V8z"/>
+    <circle cx="5.5" cy="18.5" r="2.5"/>
+    <circle cx="18.5" cy="18.5" r="2.5"/>
+  </svg>
+);
+
+const ICON_BUILDING = (
+  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <rect x="4" y="2" width="16" height="20" rx="2"/>
+    <path d="M9 22v-4h6v4M8 6h.01M16 6h.01M12 6h.01M8 10h.01M16 10h.01M12 10h.01M8 14h.01M16 14h.01M12 14h.01"/>
+  </svg>
+);
+
+const ICON_PHONE = (
+  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+  </svg>
+);
+
+const ICON_CHECK = (
+  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+    <polyline points="22 4 12 14.01 9 11.01"/>
   </svg>
 );
 
@@ -288,7 +313,7 @@ const VinChecker: React.FC<Props> = ({ onAddToHistory, onNavigateChat, onShareAp
                           <h3 className="text-3xl font-black tracking-tighter uppercase italic">{testerResult.county} County</h3>
                           <div className="flex flex-col gap-3">
                             <a href="tel:6173596953" className="block w-full py-6 bg-carb-navy text-white font-black rounded-3xl text-sm tracking-widest uppercase active-haptic shadow-xl flex items-center justify-center gap-3 italic">
-                               <div className="text-white">{APPLE_ICON}</div> TEXT/CALL TESTER
+                               <div className="text-white">{ICON_PHONE}</div> TEXT/CALL TESTER
                             </a>
                           </div>
                       </div>
@@ -318,7 +343,7 @@ const VinChecker: React.FC<Props> = ({ onAddToHistory, onNavigateChat, onShareAp
                 className="w-full group glass py-12 rounded-[3.5rem] flex flex-col items-center justify-center gap-4 active-haptic transition-all hover:bg-white/5 border border-white/5"
             >
                 <div className="w-20 h-20 rounded-full bg-white/5 flex items-center justify-center text-carb-accent group-hover:bg-carb-accent/10 transition-all border border-transparent group-hover:border-carb-accent/20">
-                    <div className="scale-150">{APPLE_ICON}</div>
+                    <div className="scale-150">{ICON_CAMERA}</div>
                 </div>
                 <span className="font-black text-[10px] tracking-[0.4em] uppercase text-gray-500 group-hover:text-carb-accent transition-colors italic">
                     {loading ? statusMessage : 'Optical Scanner'}
@@ -328,10 +353,10 @@ const VinChecker: React.FC<Props> = ({ onAddToHistory, onNavigateChat, onShareAp
             <div className="space-y-6">
                 <div className="flex gap-10 justify-center">
                     <button onClick={() => setSearchMode('VIN')} className={`py-1 text-[10px] font-black tracking-[0.3em] transition-all border-b-2 uppercase italic flex items-center gap-2 ${searchMode === 'VIN' ? 'border-carb-accent text-white' : 'border-transparent text-gray-700'}`}>
-                      {APPLE_ICON} Vehicle
+                      {ICON_TRUCK} Vehicle
                     </button>
                     <button onClick={() => setSearchMode('OWNER')} className={`py-1 text-[10px] font-black tracking-[0.3em] transition-all border-b-2 uppercase italic flex items-center gap-2 ${searchMode === 'OWNER' ? 'border-carb-accent text-white' : 'border-transparent text-gray-700'}`}>
-                      {ANDROID_ICON} Fleet ID
+                      {ICON_BUILDING} Fleet ID
                     </button>
                 </div>
                 <div className="relative">
@@ -352,11 +377,11 @@ const VinChecker: React.FC<Props> = ({ onAddToHistory, onNavigateChat, onShareAp
                         <p className="text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em] mt-2">{vehicleDetails.model} • {vehicleDetails.gvwr}</p>
                     </div>
                 )}
-                <button 
+                <button
                     onClick={checkCompliance}
                     className="w-full bg-white text-carb-navy py-6 rounded-[2.5rem] font-black tracking-[0.3em] text-[11px] uppercase shadow-2xl active-haptic hover:bg-gray-200 transition-all italic flex items-center justify-center gap-4"
                 >
-                    {APPLE_ICON} Run Protocol
+                    {ICON_CHECK} Run Protocol
                 </button>
             </div>
         </div>
@@ -364,7 +389,7 @@ const VinChecker: React.FC<Props> = ({ onAddToHistory, onNavigateChat, onShareAp
           <div className="fixed inset-0 z-[200] bg-black/95 backdrop-blur-3xl flex items-center justify-center p-8 animate-in fade-in duration-300" onClick={() => setScanResult(null)}>
               <div className="glass-dark rounded-[3.5rem] p-12 w-full max-w-sm border border-white/10 shadow-2xl space-y-12" onClick={e => e.stopPropagation()}>
                   <div className="text-center">
-                    <div className="w-16 h-16 bg-carb-accent/20 rounded-full mx-auto flex items-center justify-center text-carb-accent mb-8 shadow-inner border border-carb-accent/30">{ANDROID_ICON}</div>
+                    <div className="w-16 h-16 bg-carb-accent/20 rounded-full mx-auto flex items-center justify-center text-carb-accent mb-8 shadow-inner border border-carb-accent/30">{ICON_CAMERA}</div>
                     <h3 className="font-black text-3xl tracking-tighter leading-none italic uppercase">Scanner Result</h3>
                   </div>
                   <input 
