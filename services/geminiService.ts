@@ -486,3 +486,22 @@ const fileToBase64 = (file: File): Promise<string> => {
     reader.readAsDataURL(file);
   });
 };
+
+// Alias for backwards compatibility
+export const extractEngineTagInfo = extractEclLabel;
+
+// Generic media analysis
+export const analyzeMedia = async (file: File, prompt: string): Promise<string> => {
+  const ai = getAI();
+  const b64 = await fileToBase64(file);
+  const response = await ai.models.generateContent({
+    model: MODEL_NAMES.PRO,
+    contents: {
+      parts: [
+        { inlineData: { data: b64, mimeType: file.type } },
+        { text: prompt }
+      ]
+    }
+  });
+  return response.text || '';
+};
