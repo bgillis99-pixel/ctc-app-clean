@@ -20,7 +20,7 @@ firebase deploy
 ## URLs
 
 - **Vercel**: Will be at `ctc-app-clean.vercel.app` or custom domain
-- **Firebase**: `carb-compliance-app-3537-a1e48.web.app`
+- **Firebase**: https://carbcleantruckcheck-dr-g.web.app (LIVE)
 
 ## Get Your API Key
 
