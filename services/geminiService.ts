@@ -3,8 +3,18 @@ import { GoogleGenAI, Type } from "@google/genai";
 import { MODEL_NAMES } from "../constants";
 import { Job, Vehicle, ExtractedTruckData, ImageGenerationConfig } from "../types";
 
+// Get API key from Vite environment
+const getApiKey = (): string => {
+  // Vite uses import.meta.env, fallback to process.env for compatibility
+  const key = (import.meta as any).env?.VITE_API_KEY ||
+              (import.meta as any).env?.API_KEY ||
+              (typeof process !== 'undefined' ? process.env?.API_KEY : '') ||
+              '';
+  return key;
+};
+
 // Lazy init to handle missing API key gracefully
-const getAI = () => new GoogleGenAI({ apiKey: process.env.API_KEY as string });
+const getAI = () => new GoogleGenAI({ apiKey: getApiKey() });
 
 // Offline knowledge base for when API is unavailable
 const OFFLINE_KNOWLEDGE_BASE = [
@@ -420,7 +430,7 @@ export const generateAppImage = async (prompt: string, config: ImageGenerationCo
           if (!hasKey) await window.aistudio.openSelectKey();
       }
   }
-  const imageAi = new GoogleGenAI({ apiKey: process.env.API_KEY });
+  const imageAi = new GoogleGenAI({ apiKey: getApiKey() });
   const response = await imageAi.models.generateContent({
     model: model,
     contents: { parts: [{ text: prompt }] },
