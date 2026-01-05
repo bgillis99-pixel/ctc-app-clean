@@ -1,0 +1,21 @@
+<svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="450" fill="transparent"/>
+  
+  <!-- Stylized Truck/Checkmark Icon -->
+  <g transform="translate(230, 40) scale(1.1)">
+    <!-- Top Part -->
+    <path d="M120 40 L280 40 L280 180 L230 180 L230 90 L120 180 Z" fill="#0D3B51" />
+    <!-- Main Body Part -->
+    <path d="M10 120 L180 120 L330 230 L330 180 L180 60 L10 180 Z" fill="#0D3B51" />
+    <!-- Bottom Shadow/Base -->
+    <path d="M10 180 L180 180 L180 230 L10 230 Z" fill="#0D3B51" />
+  </g>
+
+  <!-- CLEAN TRUCK CHECK Text -->
+  <g transform="translate(40, 280)">
+    <!-- CLEAN -->
+    <text x="0" y="70" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="120" fill="#4ADE80" style="letter-spacing: 0.1em;">CLEAN</text>
+    <!-- TRUCK CHECK -->
+    <text x="0" y="150" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="65" fill="#0D3B51" style="letter-spacing: 0.18em;">TRUCK CHECK</text>
+  </g>
+</svg>
